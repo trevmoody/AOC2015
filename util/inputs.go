@@ -40,6 +40,21 @@ func GetFileAsLines(fileName string) *[]string {
 	return &lines
 }
 
+func SplitSliceOddEvenIndex[T any](slice []T) ([]T, []T) {
+	var evenIndices []T
+	var oddIndices []T
+
+	for i, value := range slice {
+		if i%2 == 0 {
+			evenIndices = append(evenIndices, value)
+		} else {
+			oddIndices = append(oddIndices, value)
+		}
+	}
+
+	return evenIndices, oddIndices
+}
+
 //
 //func StringsToInts(line string) []int {
 //	fields := strings.Fields(line)
