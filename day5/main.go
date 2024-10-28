@@ -7,24 +7,48 @@ import (
 )
 
 func main() {
+	part1(*util.GetFileAsLines("./day5/input"))
+	part2(*util.GetFileAsLines("./day5/input"))
+}
 
-	//	part1((*util.GetFileAsLines("./day5/input")))
-	part2((*util.GetFileAsLines("./day5/input")))
+func part1(list []string) {
+	count := 0
+	for _, s := range list {
+		if checkStringPart1(s) {
+			count = count + 1
+		}
+	}
+	fmt.Printf("part1 count = %d\n", count)
 
 }
 
 func part2(list []string) {
 	count := 0
 	for _, s := range list {
-		if checkString2(s) {
+		if checkStringPart2(s) {
 			count = count + 1
 		}
 	}
 	fmt.Printf("part2 count = %d\n", count)
 }
 
-func checkString2(stringToCheck string) bool {
+func checkStringPart1(stringToCheck string) bool {
+	doNotContain := make(map[string]struct{})
+	doNotContain["ab"] = struct{}{}
+	doNotContain["cd"] = struct{}{}
+	doNotContain["pq"] = struct{}{}
+	doNotContain["xy"] = struct{}{}
 
+	if countVowels(stringToCheck) > 2 &&
+		checkIf2CharsInARow(stringToCheck) &&
+		doesNotContain(doNotContain, stringToCheck) {
+		return true
+	}
+
+	return false
+}
+
+func checkStringPart2(stringToCheck string) bool {
 	if twoLettersAppearTwice(stringToCheck) && repeatWithOneLetterBetween(stringToCheck) {
 		return true
 	}
@@ -55,36 +79,6 @@ func twoLettersAppearTwice(input string) bool {
 
 	}
 	return false
-}
-
-func part1(list []string) {
-	count := 0
-	for _, s := range list {
-		if checkString1(s) {
-			count = count + 1
-		}
-	}
-	fmt.Printf("part1 count = %d\n", count)
-
-}
-
-func checkString1(stringToCheck string) bool {
-
-	// Initialize an empty set
-	doNotContain := make(map[string]struct{})
-
-	// Add elements to the set
-	doNotContain["ab"] = struct{}{}
-	doNotContain["cd"] = struct{}{}
-	doNotContain["pq"] = struct{}{}
-	doNotContain["xy"] = struct{}{}
-
-	if countVowels(stringToCheck) > 2 && checkIf2CharsInARow(stringToCheck) && doesNotContain(doNotContain, stringToCheck) {
-		return true
-	}
-
-	return false
-
 }
 
 func doesNotContain(doNotContain map[string]struct{}, stringtocheck string) bool {
