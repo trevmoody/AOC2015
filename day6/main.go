@@ -67,6 +67,10 @@ func setAndCountBrightness(grid [1000][1000]int, instructions []string) int {
 	return total
 }
 
+func setAndCountLitLightsNew(grid [][]bool, instructions []string) [][]bool {
+	return grid
+}
+
 func setAndCountLitLights(grid [1000][1000]bool, instructions []string) int {
 
 	for _, line := range instructions {
